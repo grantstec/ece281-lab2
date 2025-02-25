@@ -38,7 +38,37 @@ end sevenseg_decoder;
 
 architecture Behavioral of sevenseg_decoder is
 
+        signal o_seg_n_sorted : STD_LOGIC_VECTOR (6 downto 0);
+
 begin
+
+with i_Hex select
+o_seg_n_sorted <=  "1111110" when "0000", -- 0
+                    "0110000" when "0001", --1
+                    "1101101" when "0010", --2
+                    "1111001" when "0011", --3
+                    "0110011" when "0100", --4
+                    "1011011" when "0101", --5
+                    "1011111" when "0110", --6
+                    "1110000" when "0111", --7
+                    "1111111" when "1000", --8
+                    "1110011" when "1001", --9
+                    "1110111" when "1010", --A
+                    "0011111" when "1011", --B
+                    "0001101" when "1100", --C
+                    "0111101" when "1101", --D
+                    "1001111" when "1110", --E
+                    "1000111" when "1111", --F
+                    "0000000" when others;
+            
+o_seg_n(6) <= o_seg_n_sorted(0);
+o_seg_n(5) <= o_seg_n_sorted(1);
+o_seg_n(4) <= o_seg_n_sorted(2);
+o_seg_n(3) <= o_seg_n_sorted(3);
+o_seg_n(2) <= o_seg_n_sorted(4);
+o_seg_n(1) <= o_seg_n_sorted(5);
+o_seg_n(0) <= o_seg_n_sorted(6);
+
 
 
 end Behavioral;
