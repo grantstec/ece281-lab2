@@ -29,6 +29,7 @@
 !*.jpg
 !*.pdf
 !*.gif
+!*.mov
 
 # don't ignore .github
 !.github/
