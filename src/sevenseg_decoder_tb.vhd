@@ -14,8 +14,11 @@ architecture Behavioral of sevenseg_decoder_tb is
     -- Input signals
     signal w_Hex : STD_LOGIC_VECTOR (3 downto 0) := (others => '0');
     
-    -- Output signals
+    -- Output signals - vector for connecting to UUT
     signal w_seg_n : STD_LOGIC_VECTOR (6 downto 0);
+    
+    -- Individual segment signals for easier viewing in waveform
+    signal seg_a, seg_b, seg_c, seg_d, seg_e, seg_f, seg_g : STD_LOGIC;
     
 begin
     -- Instantiate the Unit Under Test (UUT)
@@ -24,12 +27,22 @@ begin
             i_Hex => w_Hex,
             o_seg_n => w_seg_n
         );
+    
+    -- Map individual segments for easier waveform reading
+    -- Note: Based on Basys3 mapping where seg(0) = CA, seg(6) = CG
+    seg_a <= w_seg_n(0);  -- CA
+    seg_b <= w_seg_n(1);  -- CB
+    seg_c <= w_seg_n(2);  -- CC
+    seg_d <= w_seg_n(3);  -- CD
+    seg_e <= w_seg_n(4);  -- CE
+    seg_f <= w_seg_n(5);  -- CF
+    seg_g <= w_seg_n(6);  -- CG
         
     -- Stimulus process
     stim_proc: process
     begin
         -- Test all 16 possible inputs (0 to F)
-        wait for 20 ns; -- Add initial delay
+        wait for 20 ns;
         
         -- Test for 0
         w_Hex <= "0000";  -- Hexadecimal 0
